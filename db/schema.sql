@@ -1,2 +1,2 @@
-DROP DATABASE IF EXISTS mvc_practice_db;
-CREATE DATABASE mvc_practice_db;
+DROP DATABASE IF EXISTS blog_db;
+CREATE DATABASE blog_db;
