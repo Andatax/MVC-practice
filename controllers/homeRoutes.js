@@ -7,13 +7,13 @@ router.get("/", auth, async (req, res) => {
 		const homePosts = await Post.findAll({
 			order: [["date", "ASC"]],
 		});
-
 		const posts = homePosts.map(posts => posts.get({ plain: true }));
 
 		res.render("home", {
 			posts,
 			logged_in: req.session.logged_in,
 		});
+		console.log(posts);
 	} catch (err) {
 		res.status(500).json(err);
 	}
@@ -37,7 +37,7 @@ router.get("/dashboard", auth, async (req, res) => {
 		console.log(user);
 		res.render("dashboard", {
 			...user,
-			loggedIn: req.session.loggedIn,
+			loggedIn: req.session.logged_in,
 		});
 	} catch (err) {
 		res.status(500).json(err);

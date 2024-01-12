@@ -3,13 +3,13 @@ const loginPost = async event => {
 	const email = document.querySelector("#email").value.trim();
 	const password = document.querySelector("#password").value.trim();
 	if (email && password) {
-		const response = await fetch("/api/users/login", {
+		const response = await fetch("/api/sessionsUser/login", {
 			method: "POST",
 			body: JSON.stringify({ email, password }),
 			headers: { "Content-Type": "application/json" },
 		});
 		if (response.ok) {
-			document.location.replace("/profile");
+			document.location.replace("/");
 		} else {
 			alert("Failed to log in, Please try again");
 		}
@@ -18,7 +18,7 @@ const loginPost = async event => {
 
 const signUpView = async event => {
 	event.preventDefault();
-	const response = await fetch("/api/users/signup", {
+	const response = await fetch("/api/sessionsUser/signup", {
 		method: "GET",
 		headers: { "Content-Type": "application/json" },
 	});
@@ -30,4 +30,4 @@ const signUpView = async event => {
 };
 
 document.querySelector(".loginForm").addEventListener("submit", loginPost);
-document.querySelector("#SignUpBtn").addEventListener("click", signUpView);
+document.querySelector("#signUpBtn").addEventListener("click", signUpView);

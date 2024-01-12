@@ -1,16 +1,15 @@
-<nav class="bg-rose-800 p-4 text-white">
+<nav class="bg-rose-800 w-full p-4 text-white rounded-b-md">
     <div class="container mx-auto flex justify-between items-center">
-        <!-- Logo or Blog Title -->
-        <a href="#" class="text-lg font-bold">Your Blog</a>
+        <a href="#" class="text-lg font-bold">Blog</a>
 
-        <!-- Navigation Buttons -->
         <div class="space-x-4">
-            <a href="#" class="hover:underline">Home</a>
-            <a href="#" class="hover:underline">Dashboard</a>
-            <a href="#" class="hover:underline">Logout</a>
+            <button id="home" class="hover:underline">Home</button>
+            <button id="dashboard" class="hover:underline">Dashboard</a>
+                <button id="logoutBtn" class="hover:underline logout">Logout</button>
         </div>
     </div>
 </nav>
 
-<!-- Blog Post Content -->
 {{> comments}}
+
+<script src="/js/nav.js"></script>
