@@ -1,0 +1,26 @@
+[
+    {
+      "title": "The beauty of HTML",
+      "body": "HTML is the beauty of the web and it is cool"
+    },
+    {
+      "title": "the beauty of css",
+      "body": "CSS is the beauty of the web and it is cool"
+    },
+    {
+      "title": "Node is very useful",
+      "body": "Node is very useful for web development"
+    },
+    {
+      "title": "Why SQL is important?",
+      "body": "You can create full stack applications with SQL"
+    },
+    {
+      "title": "Preparation for the interview",
+      "body": "it is important to know how to prepare for the interview"
+    },
+    {
+      "title": "express.js can be very hard to learn",
+      "body": "seeing express as a file directory path makes it very easy to learn"
+    }
+  ]

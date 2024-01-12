@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
-class Note extends Model {}
+class Post extends Model {}
 
-Note.init(
+Post.init(
 	{
 		id: {
 			type: DataTypes.INTEGER,
@@ -34,9 +34,9 @@ Note.init(
 	},
 	{
 		hook: {
-			beforeUpdate: async noteUpdate => {
-				noteUpdate.date = await new Date();
-				return noteUpdate;
+			beforeUpdate: async postUpdate => {
+				postUpdate.date = await new Date();
+				return postUpdate;
 			},
 		},
 		sequelize,
@@ -45,4 +45,4 @@ Note.init(
 		modelName: "post",
 	}
 );
-module.exports = Note;
+module.exports = Post;
