@@ -5,7 +5,11 @@ const auth = require("../utils/authentication");
 router.get("/", auth, async (req, res) => {
 	try {
 		const homePosts = await Post.findAll({
-			order: [["date", "ASC"]],
+			include: {
+				attributes: { exclude: ["password", "email"] },
+				model: User,
+				as: "user",
+			},
 		});
 		const posts = homePosts.map(posts => posts.get({ plain: true }));
 

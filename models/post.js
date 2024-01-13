@@ -26,6 +26,13 @@ Post.init(
 				key: "id",
 			},
 		},
+		user_name: {
+			type: DataTypes.VIRTUAL,
+			get() {
+				const user = this.getDataValue("user"); // assuming you set the association alias to "user"
+				return user ? user.name : null;
+			},
+		},
 		date: {
 			type: DataTypes.DATE,
 			allowNull: false,
