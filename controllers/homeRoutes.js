@@ -53,26 +53,34 @@ router.get("/dashboard", auth, async (req, res) => {
 router.get("/post/:id", auth, async (req, res) => {
 	try {
 		const postId = req.params.id;
-		console.log(`PostId:, ${postId}`);
+		// console.log(`PostId:, ${postId}`);
 		const post = await Post.findByPk(postId, {
-			include: [{ model: Comment }, { model: User, attributes: { exclude: ["password", "email"] } }],
+			include: [
+				{
+					model: Comment,
+					include: [{ model: User, as: "user", attributes: { exclude: ["password", "email"] } }],
+				},
+				{ model: User, attributes: { exclude: ["password", "email"] } },
+			],
 			order: [["date", "ASC"]],
 		});
-		console.log("post.datavalues variable---------------------------");
-		console.log(post.dataValues);
+		// console.log("post.datavalues variable---------------------------");
+		// console.log(post.dataValues);
 		const postComments = post.comments.map(comment => comment.get({ plain: true }));
-		console.log("postComments variable---------------------------");
-		console.log(postComments);
+		// console.log("postComments variable---------------------------");
+		// console.log(postComments);
 		const user = post.user.get({ plain: true });
-		console.log("user variable---------------------------");
-		console.log(user);
+		// console.log("user variable---------------------------");
+		// console.log(user);
 		res.render("commentsView", {
+			layout: "comments",
 			post: post.dataValues,
 			comments: postComments,
-			user: user.dataValues,
+			user: user,
 			logged_in: req.session.logged_in,
 		});
 	} catch (err) {
+		console.log(err);
 		res.status(500).json(err);
 	}
 });
