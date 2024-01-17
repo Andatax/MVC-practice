@@ -12,16 +12,20 @@ const seedDb = async () => {
 		individualHooks: true,
 		returning: true,
 	});
-	for (const post of postsdb) {
-		await Post.create({
+
+	const posts = await Post.bulkCreate(
+		postsdb.map(post => ({
 			...post,
 			user_id: users[Math.floor(Math.random() * users.length)].id,
-		});
-	}
+		}))
+	);
 	for (const comment of commentsdb) {
+		const randomUser = users[Math.floor(Math.random() * users.length)];
 		await Comment.create({
 			...comment,
-			user_id: users[Math.floor(Math.random() * users.length)].id,
+			user_id: randomUser.id,
+			post_id: posts[Math.floor(Math.random() * posts.length)].id,
+			user_name: randomUser.name,
 		});
 	}
 	process.exit(0);

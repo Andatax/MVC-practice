@@ -19,12 +19,13 @@ router.get("/", auth, async (req, res) => {
 		});
 		console.log(posts);
 	} catch (err) {
+		console.log(err);
 		res.status(500).json(err);
 	}
 });
 
 router.get("/signup", async (req, res) => {
-	if (req.session.loggedIn) {
+	if (req.session.logged_in) {
 		res.redirect("/");
 	} else {
 		res.render("signup");
@@ -32,7 +33,8 @@ router.get("/signup", async (req, res) => {
 });
 router.get("/dashboard", auth, async (req, res) => {
 	try {
-		const userData = await User.findByPk(req.session.userId, {
+		console.log(req.session.user_id);
+		const userData = await User.findByPk(req.session.user_id, {
 			attributes: { exclude: ["password"] },
 			include: [{ model: Post }],
 		});
@@ -44,21 +46,30 @@ router.get("/dashboard", auth, async (req, res) => {
 			loggedIn: req.session.logged_in,
 		});
 	} catch (err) {
-		res.status(500).json(err);
+		console.error("Error:", err);
 	}
 });
 
-router.get("/posts/:id", auth, async (req, res) => {
+router.get("/post/:id", auth, async (req, res) => {
 	try {
-		const commentsPostData = await Post.findByPk(req.session.userId, {
-			include: [{ model: Comment }],
+		const postId = req.params.id;
+		console.log(`PostId:, ${postId}`);
+		const post = await Post.findByPk(postId, {
+			include: [{ model: Comment }, { model: User, attributes: { exclude: ["password", "email"] } }],
 			order: [["date", "ASC"]],
 		});
-
-		const posts = commentsPostData.map(posts => posts.get({ plain: true }));
-
-		res.render("post", {
-			posts,
+		console.log("post.datavalues variable---------------------------");
+		console.log(post.dataValues);
+		const postComments = post.comments.map(comment => comment.get({ plain: true }));
+		console.log("postComments variable---------------------------");
+		console.log(postComments);
+		const user = post.user.get({ plain: true });
+		console.log("user variable---------------------------");
+		console.log(user);
+		res.render("commentsView", {
+			post: post.dataValues,
+			comments: postComments,
+			user: user.dataValues,
 			logged_in: req.session.logged_in,
 		});
 	} catch (err) {

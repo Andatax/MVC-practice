@@ -18,7 +18,7 @@ const loginPost = async event => {
 
 const signUpView = async event => {
 	event.preventDefault();
-	const response = await fetch("/api/sessionsUser/signup", {
+	const response = await fetch("/signup", {
 		method: "GET",
 		headers: { "Content-Type": "application/json" },
 	});

@@ -1,5 +1,6 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
+const moment = require("moment");
 
 class Post extends Model {}
 
@@ -29,12 +30,14 @@ Post.init(
 		user_name: {
 			type: DataTypes.VIRTUAL,
 			get() {
-				const user = this.getDataValue("user"); // assuming you set the association alias to "user"
-				return user ? user.name : null;
+				return this.getDataValue("user") ? this.getDataValue("user").name : null;
 			},
 		},
 		date: {
 			type: DataTypes.DATE,
+			get() {
+				return moment(this.getDataValue("date")).format("MMM DD, YY");
+			},
 			allowNull: false,
 			defaultValue: DataTypes.NOW,
 		},
@@ -52,4 +55,5 @@ Post.init(
 		modelName: "post",
 	}
 );
+
 module.exports = Post;
