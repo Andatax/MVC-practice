@@ -1,17 +1,17 @@
 
 {{#each posts as |post| }}
+    <article class="postBtn  container mx-auto mt-8 p-4 bg-white shadow-lg" post_id="{{post.id}}">
+    
 
-        <button class=" postBtn container mx-auto mt-8 p-4 bg-white shadow-lg text-start" post_id="{{post.id}}">
+                <h1 class="text-3xl font-bold mb-4"><a href="/post/{{post.id}}">{{post.title}}</a></h1>
 
-                    <h1 class="text-3xl font-bold mb-4">{{post.title}}</h1>
-                    
 
-                    <p>{{post.body}}</p>
-                    <p class="text-gray-600 text-sm">
-                        Published on <span class="font-semibold">{{post.date}}</span> by
-                        <span class="font-semibold">{{post.user.name}}</span>
-                    </p>
-        </button>
+                <p>{{post.body}}</p>
+                <p class="text-gray-600 text-xs">
+                    Published on <span class="font-semibold">{{post.date}}</span> by
+                <span class="font-semibold">{{post.user_name}}</span>
+                </p>
+       
+</article>
 
 {{/each}}
-<script src="/js/post.js"></script>

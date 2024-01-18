@@ -1,0 +1,21 @@
+
+
+{{> header}}
+<div class=" postBtn container mx-auto mt-8 p-4 bg-white shadow-lg text-start" post_id="{{post.id}}">
+
+    <h1 class="text-3xl font-bold mb-4">{{post.title}}</h1>
+
+
+    <p>{{post.body}}</p>
+    <p class="text-gray-600 text-xs">
+        <span class="font-semibold">Posted by {{post.user.dataValues.name}}</span>
+    </p>
+</div>
+
+</br>
+
+{{> comments}}
+
+
+
+

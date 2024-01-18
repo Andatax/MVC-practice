@@ -34,15 +34,15 @@ router.get("/signup", async (req, res) => {
 router.get("/dashboard", auth, async (req, res) => {
 	try {
 		console.log(req.session.user_id);
-		const userData = await User.findByPk(req.session.user_id, {
-			attributes: { exclude: ["password"] },
-			include: [{ model: Post }],
+		const postData = await Post.findAll({
+			where: { user_id: req.session.user_id },
+			include: [{ model: User, as: "user", attributes: { exclude: ["password", "email"] } }],
 		});
 
-		const user = userData.get({ plain: true });
-		console.log(user);
+		const posts = postData.map(posts => posts.get({ plain: true }));
+		console.log(posts);
 		res.render("dashboard", {
-			...user,
+			posts,
 			loggedIn: req.session.logged_in,
 		});
 	} catch (err) {
@@ -60,7 +60,7 @@ router.get("/post/:id", auth, async (req, res) => {
 					model: Comment,
 					include: [{ model: User, as: "user", attributes: { exclude: ["password", "email"] } }],
 				},
-				{ model: User, attributes: { exclude: ["password", "email"] } },
+				{ model: User, as: "user", attributes: { exclude: ["password", "email"] } },
 			],
 			order: [["date", "ASC"]],
 		});
@@ -72,8 +72,7 @@ router.get("/post/:id", auth, async (req, res) => {
 		const user = post.user.get({ plain: true });
 		// console.log("user variable---------------------------");
 		// console.log(user);
-		res.render("commentsView", {
-			layout: "comments",
+		res.render("singlePost", {
 			post: post.dataValues,
 			comments: postComments,
 			user: user,

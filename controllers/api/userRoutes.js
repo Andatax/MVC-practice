@@ -26,21 +26,21 @@ router.post("/login", async (req, res) => {
 	}
 });
 
-router.post("/logout", (req, res) => {
+router.get("/logout", (req, res) => {
 	console.log(req.session.logged_in);
 	if (req.session.logged_in) {
 		req.session.destroy(() => {
-			res.status(204).end();
+			res.redirect("/login");
 		});
 	} else {
-		res.status(404).end();
+		res.redirect("/login");
 	}
 });
 
 router.post("/signup", async (req, res) => {
 	try {
-		const { email, password } = req.body;
-		const userInfo = await User.create({ email, password });
+		const { email, password,name } = req.body;
+		const userInfo = await User.create({ email, password,name });
 
 		req.session.logged_in = true;
 		req.session.user_id = userInfo.id;

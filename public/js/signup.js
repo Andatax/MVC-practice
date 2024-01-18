@@ -1,16 +1,16 @@
 const signUpFormHandler = async event => {
 	event.preventDefault();
 	const email = document.querySelector("#email").value.trim();
-	const username = document.querySelector("#username").value.trim();
+	const name = document.querySelector("#name").value.trim();
 	const password = document.querySelector("#password").value.trim();
 
-	if (email && password && username) {
+	if (email && password && name) {
 		const response = await fetch("/api/sessionsUser/signup", {
 			method: "POST",
 			body: JSON.stringify({
 				email,
 				password,
-				username,
+				name,
 			}),
 			headers: { "Content-Type": "application/json" },
 		});
@@ -34,5 +34,5 @@ const signInView = async event => {
 		response.status(500).json(err);
 	}
 };
-document.querySelector("#signInBtn").addEventListener("click", signUpView);
+document.querySelector("#signInBtn").addEventListener("click", signInView);
 document.querySelector(".signUpForm").addEventListener("submit", signUpFormHandler);

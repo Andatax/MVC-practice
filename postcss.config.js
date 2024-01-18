@@ -8,7 +8,7 @@ module.exports = {
 			preset: "default",
 		}),
 		purgecss({
-			content: ["./views/layouts/*.handlebars", "./views/*.handlebars", "./views/partials/*.handlebars", "./views/commentsView.handlebars"],
+			content: ["./views/layouts/*.handlebars", "./views/*.handlebars", "./views/partials/*.handlebars"],
 			defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || [],
 		}),
 	],

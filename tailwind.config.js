@@ -5,7 +5,6 @@ module.exports = {
 		"./views/layouts/*.handlebars",
 		"./views/*.handlebars",
 		"./views/partials/*.handlebars",
-		"./views/commentsView.handlebars",
 	],
 	theme: {
 		extend: {},
