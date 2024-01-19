@@ -64,8 +64,8 @@ router.get("/post/:id", auth, async (req, res) => {
 			],
 			order: [["date", "ASC"]],
 		});
-		// console.log("post.datavalues variable---------------------------");
-		// console.log(post.dataValues);
+		console.log("post.datavalues variable---------------------------");
+		console.log(post.dataValues);
 		const postComments = post.comments.map(comment => comment.get({ plain: true }));
 		// console.log("postComments variable---------------------------");
 		// console.log(postComments);

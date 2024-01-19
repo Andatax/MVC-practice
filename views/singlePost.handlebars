@@ -1,18 +1,22 @@
 
 
 {{> header}}
-<div class=" postBtn container mx-auto mt-8 p-4 bg-white shadow-lg text-start" post_id="{{post.id}}">
+<article class=" flex justify-between w-full container mx-auto mt-6 p-4 bg-white shadow-lg" post_id="{{post.id}}">
+    <div class="w-5/6">
+        <h1 class="text-4xl font-bold mb-4"><a href="/post/{{post.id}}">{{post.title}}</a></h1>
+        <p>{{post.body}}</p>
+        <p class="text-gray-600 text-xs">
+            Published by
+            <span class="font-semibold">{{post.user.dataValues.name}}</span>
+        </p>
+    </div>
+    <div class="flex items-center">
+        <a href="/api/posts/postDelete/{{post.id}}"
+            class="w-full h-6 text-xs cursor-pointer border bg-rose-800 text-white px-4 py-1 rounded-sm hover:bg-gray-700">Delete
+            Post</a>
+    </div>
+</article>
 
-    <h1 class="text-3xl font-bold mb-4">{{post.title}}</h1>
-
-
-    <p>{{post.body}}</p>
-    <p class="text-gray-600 text-xs">
-        <span class="font-semibold">Posted by {{post.user.dataValues.name}}</span>
-    </p>
-</div>
-
-</br>
 
 {{> comments}}
 

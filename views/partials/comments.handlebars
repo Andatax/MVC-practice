@@ -1,11 +1,16 @@
 
 
 {{#each comments as |comment| }}
-<div class="container mx-auto mt-8 p-4 bg-white shadow-lg">
-    <p>{{comment.body}}</p>
+<article class="container flex justify-between w-full mx-auto mt-2 p-4 bg-white shadow-lg">
+    <div><p class="text-md">{{comment.body}}</p>
     <p class="text-gray-600">
         <span class="text-xs font-semibold">Commented by {{comment.user.name}}</span>
-    </p>
-
-</div>
+    </p></div>
+   
+        <div class="flex items-center">
+            <a href="/api/posts/commentDelete/{{comment.id}}"
+                class="w-full h-6 text-xs cursor-pointer border bg-rose-800 text-white px-4 py-1 rounded-sm hover:bg-gray-700">Delete
+                Comment</a>
+        </div>
+</article>
 {{/each}}

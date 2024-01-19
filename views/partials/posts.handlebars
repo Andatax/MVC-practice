@@ -1,17 +1,20 @@
 
 {{#each posts as |post| }}
-    <article class="postBtn  container mx-auto mt-8 p-4 bg-white shadow-lg" post_id="{{post.id}}">
-    
-
-                <h1 class="text-3xl font-bold mb-4"><a href="/post/{{post.id}}">{{post.title}}</a></h1>
-
-
+    <article class=" flex justify-between w-full container mx-auto mt-6 p-4 bg-white shadow-lg" post_id="{{post.id}}">
+        <div class="w-5/6">
+                <h1 class="text-4xl font-bold mb-4"><a href="/post/{{post.id}}">{{post.title}}</a></h1>
                 <p>{{post.body}}</p>
                 <p class="text-gray-600 text-xs">
                     Published on <span class="font-semibold">{{post.date}}</span> by
                 <span class="font-semibold">{{post.user_name}}</span>
                 </p>
-       
-</article>
+        </div>
+        <div class="flex items-center">
+            <a href="/api/posts/postDelete/{{post.id}}"
+            class="w-full h-6 text-xs cursor-pointer border bg-rose-800 text-white px-4 py-1 rounded-sm hover:bg-gray-700">Delete
+            Post</a>
+            </div>
+        </article>
+        
 
 {{/each}}

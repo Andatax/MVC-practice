@@ -49,9 +49,8 @@ router.post("/posts/:id", auth, async (req, res) => {
 	}
 });
 
-router.delete("/posts/:id", async (req, res) => {
+router.get("/commentDelete/:id", async (req, res) => {
 	try {
-		console.log(req.params);
 		const commentData = await Comment.destroy({
 			where: { id: req.params.id },
 		});
@@ -62,8 +61,27 @@ router.delete("/posts/:id", async (req, res) => {
 
 		res.status(200).json(commentData);
 	} catch (err) {
+		console.log(err);
 		res.status(500).json(err);
 	}
 });
 
+router.get("/postDelete/:id", async (req, res) => {
+	try {
+		console.log(req.params);
+		const postData = await Post.destroy({
+			where: { id: req.params.id },
+		});
+
+		if (!postData) {
+			res.status(404).json({ message: "Post not found" });
+			return;
+		}
+
+		res.status(200).json(postData);
+	} catch (err) {
+		console.log(err);
+		res.status(500).json(err);
+	}
+});
 module.exports = router;
