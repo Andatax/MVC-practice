@@ -1,8 +1,3 @@
-{{> header}}
-
-{{> posts}}
-
-{{!-- {{> postModal}} --}}
 <div class="fixed inset-0 flex items-center justify-center hidden bg-gray-800 bg-opacity-75" id="newPostModal">
     <div class="bg-white p-8 max-w-md w-full rounded-lg shadow-lg">
         <form class="newPostForm">
@@ -20,7 +15,7 @@
                     placeholder="Enter your description.&#10; No more than 100 characters" />
             </div>
             <div>
-                <button class="w-full bg-rose-700 text-white px-4 py-2 rounded-md hover:bg-gray-700" type="submit">
+                <button class="w-full bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700" type="submit">
                     Create Post
                 </button>
             </div>
@@ -28,4 +23,3 @@
     </div>
 </div>
 <script src="/js/newPost.js"></script>
-

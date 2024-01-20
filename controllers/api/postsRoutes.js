@@ -12,11 +12,42 @@ router.post("/", auth, async (req, res) => {
 			userId: req.session.user_id,
 		});
 		res.status(200).json(newPost);
+		console.log(newPost);
 	} catch (err) {
+		console.log(err);
 		res.status(400).json(err);
 	}
 });
+// router.post("/comment", auth, async (req, res) => {
+// 	const { body } = req.body;
+// 	console.log("error is after creating new comment");
+// 	try {
+// 		const newComment = await Comment.create({
+// 			body,
+// 			userId: req.session.user_id,
+// 		});
+// 		res.redirect("/");
+// 	} catch (err) {
+// 		console.log("error in route /comment");
+// 		console.log(err);
+// 	}
+// });
 
+router.post("/comment", auth, async (req, res) => {
+	const { body, postId } = req.body;
+	try {
+		const newComment = await Comment.create({
+			body,
+			user_id: req.session.user_id,
+			post_id: req.body.post_id,
+		});
+		res.redirect("/");
+		console.log(newComment);
+	} catch (err) {
+		console.log(err);
+		res.status(400).json(err);
+	}
+});
 router.delete("/:id", async (req, res) => {
 	try {
 		console.log(req.params);
@@ -54,13 +85,15 @@ router.get("/commentDelete/:id", async (req, res) => {
 		const commentData = await Comment.destroy({
 			where: { id: req.params.id },
 		});
+		res.redirect("/");
+		res.status(200).json(commentData);
 		if (!commentData) {
 			res.status(404).json({ message: "Commment not found" });
+
 			return;
 		}
-
-		res.status(200).json(commentData);
 	} catch (err) {
+		res.redirect("/");
 		console.log(err);
 		res.status(500).json(err);
 	}
@@ -77,11 +110,11 @@ router.get("/postDelete/:id", async (req, res) => {
 			res.status(404).json({ message: "Post not found" });
 			return;
 		}
-
-		res.status(200).json(postData);
+		res.redirect("/");
 	} catch (err) {
+		res.redirect("/");
 		console.log(err);
-		res.status(500).json(err);
+		return res.status(500).json(err);
 	}
 });
 module.exports = router;
