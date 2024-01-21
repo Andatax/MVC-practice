@@ -9,7 +9,7 @@ router.post("/", auth, async (req, res) => {
 		const newPost = await Post.create({
 			title,
 			body,
-			userId: req.session.user_id,
+			user_id: req.session.user_id,
 		});
 		res.status(200).json(newPost);
 		console.log(newPost);
@@ -19,29 +19,29 @@ router.post("/", auth, async (req, res) => {
 	}
 });
 
-router.post("/update", auth, async (req, res) => {
-	const { id, title, body } = req.body;
+// router.post("/update", auth, async (req, res) => {
+// 	const { id, title, body } = req.body;
 
-	try {
-		console.log("Update request received:", { id, title, body, user_id: req.session.user_id });
+// 	try {
+// 		console.log("Update request received:", { id, title, body, user_id: req.session.user_id });
 
-		const [, updatedPost] = await Post.update(
-			{ title, body },
-			{ where: { id, user_id: req.session.user_id } }
-		);
+// 		const [, updatedPost] = await Post.update(
+// 			{ title, body },
+// 			{ where: { id, user_id: req.session.user_id } }
+// 		);
 
-		console.log("Updated post:", updatedPost);
+// 		console.log("Updated post:", updatedPost);
 
-		if (updatedPost === 1) {
-			res.status(200).json({ message: "Post updated successfully" });
-		} else {
-			res.status(404).json({ message: "Post not found or user unauthorized" });
-		}
-	} catch (err) {
-		console.log("Error updating post:", err);
-		res.status(500).json({ message: "Internal Server Error" });
-	}
-});
+// 		if (updatedPost === 1) {
+// 			res.status(200).json({ message: "Post updated successfully" });
+// 		} else {
+// 			res.status(404).json({ message: "Post not found or user unauthorized" });
+// 		}
+// 	} catch (err) {
+// 		console.log("Error updating post:", err);
+// 		res.status(500).json({ message: "Internal Server Error" });
+// 	}
+// });
 
 router.post("/comment", auth, async (req, res) => {
 	const { body, post_id } = req.body;
