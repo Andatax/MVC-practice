@@ -18,23 +18,33 @@ router.post("/", auth, async (req, res) => {
 		res.status(400).json(err);
 	}
 });
-// router.post("/comment", auth, async (req, res) => {
-// 	const { body } = req.body;
-// 	console.log("error is after creating new comment");
-// 	try {
-// 		const newComment = await Comment.create({
-// 			body,
-// 			userId: req.session.user_id,
-// 		});
-// 		res.redirect("/");
-// 	} catch (err) {
-// 		console.log("error in route /comment");
-// 		console.log(err);
-// 	}
-// });
+
+router.post("/update", auth, async (req, res) => {
+	const { id, title, body } = req.body;
+
+	try {
+		console.log("Update request received:", { id, title, body, user_id: req.session.user_id });
+
+		const [, updatedPost] = await Post.update(
+			{ title, body },
+			{ where: { id, user_id: req.session.user_id } }
+		);
+
+		console.log("Updated post:", updatedPost);
+
+		if (updatedPost === 1) {
+			res.status(200).json({ message: "Post updated successfully" });
+		} else {
+			res.status(404).json({ message: "Post not found or user unauthorized" });
+		}
+	} catch (err) {
+		console.log("Error updating post:", err);
+		res.status(500).json({ message: "Internal Server Error" });
+	}
+});
 
 router.post("/comment", auth, async (req, res) => {
-	const { body, postId } = req.body;
+	const { body, post_id } = req.body;
 	try {
 		const newComment = await Comment.create({
 			body,
@@ -86,10 +96,8 @@ router.get("/commentDelete/:id", async (req, res) => {
 			where: { id: req.params.id },
 		});
 		res.redirect("/");
-		res.status(200).json(commentData);
 		if (!commentData) {
 			res.status(404).json({ message: "Commment not found" });
-
 			return;
 		}
 	} catch (err) {
