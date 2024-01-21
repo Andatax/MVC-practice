@@ -1,9 +1,10 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
+const moment = require("moment");
 
-class Note extends Model {}
+class Post extends Model {}
 
-Note.init(
+Post.init(
 	{
 		id: {
 			type: DataTypes.INTEGER,
@@ -26,17 +27,26 @@ Note.init(
 				key: "id",
 			},
 		},
+		user_name: {
+			type: DataTypes.VIRTUAL,
+			get() {
+				return this.getDataValue("user") ? this.getDataValue("user").name : null;
+			},
+		},
 		date: {
 			type: DataTypes.DATE,
+			get() {
+				return moment(this.getDataValue("date")).format("MMM DD, YY");
+			},
 			allowNull: false,
 			defaultValue: DataTypes.NOW,
 		},
 	},
 	{
 		hook: {
-			beforeUpdate: async noteUpdate => {
-				noteUpdate.date = await new Date();
-				return noteUpdate;
+			beforeUpdate: async postUpdate => {
+				postUpdate.date = await new Date();
+				return postUpdate;
 			},
 		},
 		sequelize,
@@ -45,4 +55,5 @@ Note.init(
 		modelName: "post",
 	}
 );
-module.exports = Note;
+
+module.exports = Post;

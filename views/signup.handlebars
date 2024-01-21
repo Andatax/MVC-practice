@@ -1,0 +1,37 @@
+<div class="bg-gray-50 flex items-center justify-center h-screen">
+    <div class="bg-white rounded-lg shadow-lg flex items-center text-gray-900 justify-between h-4/6 w-full max-w-5xl">
+        <div class="w-1/2 h-full rounded-l-md rounded-r-sm flex text-center text-gray-50  bg-rose-800">
+            <div
+                class="flex-col w-full h-full rounded-l-sm rounded-r-md px-8 py-20 justify-center items-center ">
+                <h2 class="text-5xl font-bold text-accent-color mb-6">Already have an account ?</h2>
+                <p class="text-lg mb-6">Click on the sign in button to login</p>
+                <button class="w-2/3 py-3 border rounded-md hover:bg-opacity-80 focus:outline-none focus:ring-slate-50"
+                    id="signInBtn">
+                    <a href="./login " class="text-zinc-50">Sign In</a>
+                </button>
+            </div>
+        </div>
+        <div class="w-1/2 p-5 text-center">
+            <h2 class="text-5xl text-gray-900 text-center font-bold mb-6">Sign up</h2>
+            <form class="signUpForm">
+                <div class="mb-6">
+                    <input type="text" id="name" name="name" placeholder="Full Name"
+                        class="w-full px-4 py-3 border border-primary-color rounded-md focus:outline-none focus:ring-slate-500" />
+                </div>
+                <div class="mb-6">
+                    <input type="email" id="email" name="email" placeholder="Email"
+                        class="w-full px-4 py-3 border border-primary-color rounded-md focus:outline-none focus:ring-slate-500" />
+                </div>
+                <div class="mb-6">
+                    <input type="password" id="password" name="password" placeholder="Password"
+                        class="w-full px-4 py-3 border border-primary-color rounded-md focus:outline-none focus:ring-slate-500" />
+                </div>
+                <button type="submit"
+                    class="w-full max-w-sm text-gray-900 px-6 py-3 bg-accent-color text-primary-color rounded-md hover:bg-opacity-80 focus:outline-none focus:ring-slate-50 border">
+                    Sign Up
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="./js/signup.js"></script>

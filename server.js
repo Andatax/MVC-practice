@@ -14,8 +14,8 @@ const PORT = process.env.PORT || 3001;
 const hbs = exphbs.create({});
 
 const sess = {
-	secret: process.env.SESSION_SECRET,
-	cookie: {},
+	secret: process.env.SESSION_SECRET || "thocky-keyboards-are-great-for-mvc-models",
+	cookie: { maxAge: 600000, httpOnly: true, secure: false, sameSite: "strict" },
 	resave: false,
 	saveUninitialized: true,
 	store: new SequelizeStore({
