@@ -1,4 +1,4 @@
-# CMS-Style Blog Site
+# MVC Blog
 
 ## Description
 
@@ -18,7 +18,7 @@ To set up the CMS-Style Blog Site on your local machine, follow these steps:
 
 1. **Clone the project repository to your local storage:**
 
-   ```bash
+   ```
    git clone https://github.com/Andatax/MVC-practice
    ```
 
@@ -30,7 +30,8 @@ To set up the CMS-Style Blog Site on your local machine, follow these steps:
 
 3. **Initialize your project and install the required dependencies (Inquirer):**
 
-   ```npm install
+   ```
+   npm install
 
    ```
 
@@ -39,12 +40,17 @@ To set up the CMS-Style Blog Site on your local machine, follow these steps:
 
 5. **Start the application:**
 
-   ```npm start
+   ```
+   npm start
 
    ```
 
-6. **Access the application in your web browser at http://localhost:3000.**
+6. **Access the application in your web browser at http://localhost:3001 for locarl enviroment**
    <br/>
+
+7. **Check the deployed app at**
+
+https://mvc-blog-tailwind-95c92be2d918.herokuapp.com/login
 
 ## Usage
 
